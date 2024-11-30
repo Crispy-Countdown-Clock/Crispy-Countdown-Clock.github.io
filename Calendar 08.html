@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  	<title>Calendar 08</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="Calendar%2008_files/css.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="Calendar%2008_files/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="Calendar%2008_files/style.css">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Calendar #08</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="content w-100">
+				    <div class="calendar-container">
+				      <div class="calendar"> 
+				        <div class="year-header"> 
+				          <span class="left-button fa fa-chevron-left" id="prev"> </span> 
+				          <span class="year" id="label">2024</span> 
+				          <span class="right-button fa fa-chevron-right" id="next"> </span>
+				        </div> 
+				        <table class="months-table w-100"> 
+				          <tbody>
+				            <tr class="months-row">
+				              <td class="month">Jan</td> 
+				              <td class="month">Feb</td> 
+				              <td class="month">Mar</td> 
+				              <td class="month">Apr</td> 
+				              <td class="month">May</td> 
+				              <td class="month">Jun</td> 
+				              <td class="month">Jul</td>
+				              <td class="month">Aug</td> 
+				              <td class="month">Sep</td> 
+				              <td class="month">Oct</td>          
+				              <td class="month active-month">Nov</td>
+				              <td class="month">Dec</td>
+				            </tr>
+				          </tbody>
+				        </table> 
+				        
+				        <table class="days-table w-100"> 
+				          <tbody><tr><td class="day">Sun</td> 
+				          <td class="day">Mon</td> 
+				          <td class="day">Tue</td> 
+				          <td class="day">Wed</td> 
+				          <td class="day">Thu</td> 
+				          <td class="day">Fri</td> 
+				          <td class="day">Sat</td>
+				        </tr></tbody></table> 
+				        <div class="frame"> 
+				          <table class="dates-table w-100"> 
+			              <tbody class="tbody"><tr class="table-row"></tr><tr class="table-row"><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date">1</td><td class="table-date">2</td></tr><tr class="table-row"><td class="table-date">3</td><td class="table-date">4</td><td class="table-date">5</td><td class="table-date">6</td><td class="table-date">7</td><td class="table-date">8</td><td class="table-date">9</td></tr><tr class="table-row"><td class="table-date">10</td><td class="table-date">11</td><td class="table-date">12</td><td class="table-date">13</td><td class="table-date">14</td><td class="table-date">15</td><td class="table-date">16</td></tr><tr class="table-row"><td class="table-date">17</td><td class="table-date">18</td><td class="table-date">19</td><td class="table-date">20</td><td class="table-date">21</td><td class="table-date">22</td><td class="table-date">23</td></tr><tr class="table-row"><td class="table-date">24</td><td class="table-date">25</td><td class="table-date">26</td><td class="table-date">27</td><td class="table-date">28</td><td class="table-date">29</td><td class="table-date active-date">30</td></tr><tr class="table-row"><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td><td class="table-date nil"></td></tr></tbody> 
+				          </table>
+				        </div> 
+				        <button class="button" id="add-button">Add Event</button>
+				      </div>
+				    </div>
+				    <div class="events-container"><div class="event-card" style="border-left: 10px solid rgb(255, 23, 68);"><div class="event-name">There are no events planned for November 30.</div></div></div>
+				    <div class="dialog" id="dialog">
+				        <h2 class="dialog-header"> Add New Event </h2>
+				        <form class="form" id="form">
+				          <div class="form-container" align="center">
+				            <label class="form-label" id="valueFromMyButton" for="name">Event name</label>
+				            <input class="input" type="text" id="name" maxlength="36">
+				            <label class="form-label" id="valueFromMyButton" for="count">Number of people to invite</label>
+				            <input class="input" type="number" id="count" min="0" max="1000000" maxlength="7">
+				            <input type="button" value="Cancel" class="button" id="cancel-button">
+				            <input type="button" value="OK" class="button button-white" id="ok-button">
+				          </div>
+				        </form>
+				      </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="Calendar%2008_files/jquery.min.js"></script>
+  <script src="Calendar%2008_files/popper.js"></script>
+  <script src="Calendar%2008_files/bootstrap.min.js"></script>
+  <script src="Calendar%2008_files/main.js"></script>
+
+	<script defer="defer" src="Calendar%2008_files/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon="{&quot;rayId&quot;:&quot;8ea8ec463f883341&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}},&quot;version&quot;:&quot;2024.10.5&quot;,&quot;token&quot;:&quot;cd0b4b3a733644fc843ef0b185f98241&quot;}" crossorigin="anonymous"></script>
+
+
+
+</body></html>

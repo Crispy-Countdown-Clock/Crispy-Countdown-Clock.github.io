@@ -1,1 +1,144 @@
-hey guys
+<!DOCTYPE html>
+
+<head>
+
+    <title>Crispy Countdown</title>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.2.0/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-u3h5SFn5baVOWbh8UkOrAaLXttgSF0vXI15ODtCSxl0v/VKivnCN6iHCcvlyTL7L" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.2.0/dist/js/coreui.bundle.min.js" integrity="sha384-JdRP5GRWP6APhoVS1OM/pOKMWe7q9q8hpl+J2nhCfVJKoS+yzGtELC5REIYKrymn" crossorigin="anonymous"></script>
+
+    <!-- <style>
+        #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+        #sortable li span { position: absolute; margin-left: -1.3em; }
+    </style> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+        $( "#sortable" ).sortable();
+    } );
+    </script>
+
+</head>
+
+
+<body>
+
+    <!-- <ul id="sortable">
+        <li ><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>11111</li>
+        <li ><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>222222</li>
+        <li ><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>3333333</li>
+    </ul> -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>
+                    <a href="./calendar.html">Calendar</a>
+                </h3>
+            </div>
+
+            <div class="col-md-4">
+                <img class="center-block" alt="countdown clock probably" src="/img/sports-q-c-140-140-3.jpg" />
+                <h3 class="text-center">
+                    20:00
+                </h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img alt="play icon" src="/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                    <div class="col-md-6">
+                        <img alt="pause icon" src="/img/sports-q-c-140-140-3.jpg" />
+                    </div>
+                </div>
+                <!-- <div class="container-fluid"> -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>
+                                Daily tasks
+                            </h3>
+                            <ol class="list-unstyled" id="sortable">
+                                <li class="list-item">
+                                    do homework
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Edit Icon
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                            </div>
+                                            <div class="modal-body">
+                                                stuff
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+  
+                                </li>
+
+                                <li class="list-item">
+                                    do dishes
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Edit Icon
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                                            </div>
+                                            <div class="modal-body">
+                                                stuff
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
+                                            <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+  
+                                </li>
+
+                            </ol>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+
+            <div class="col-md-4">
+                calndar
+                <div class="d-flex justify-content-center">
+                    <div
+                      class="border rounded"
+                      data-coreui-locale="en-US"
+                      data-coreui-start-date="2024/02/13"
+                      data-coreui-toggle="calendar"
+                    ></div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
