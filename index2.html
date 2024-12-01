@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crispy Countdown</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    
+    <!-- CoreUI -->
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.2.0/dist/css/coreui.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.2.0/dist/js/coreui.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- jQuery and jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+
+    <script>
+        $(function () {
+            $("#sortable").sortable();
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Crispy Countdown</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" id="showHomePage">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="showCalendarPage">Calendar</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Sections -->
+        <div id="app">
+            <!-- Home Page -->
+            <div id="homePage" class="page">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Countdown Timer</h3>
+                        <h3 class="text-center" id="timerText">20:00</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-success w-100" id="playButton">Play</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-danger w-100" id="pauseButton">Pause</button>
+                            </div>
+                        </div>
+
+                        <h3>Daily Tasks</h3>
+                        <ol id="sortable">
+                            <li class="list-item">
+                                Do homework
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal" data-shartText="Do homework">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger deleteTaskButton">Delete</button>
+                            </li>
+                            <li class="list-item">
+                                Do dishes
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal" data-shartText="Do dishes">
+                                    Edit
+                                </button>
+                                <button class="btn btn-danger deleteTaskButton">Delete</button>
+                            </li>
+                        </ol>
+                        <button class="btn btn-success" id="addTaskButton">Add Task</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Page -->
+            <div id="calendarPage" class="page" style="display: none;">
+                <h3>Calendar</h3>
+                <div class="d-flex justify-content-center">
+                    <div
+                        class="border rounded"
+                        data-coreui-locale="en-US"
+                        data-coreui-start-date="2024/02/13"
+                        data-coreui-toggle="calendar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Edit Task</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="editTaskInput" class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="editTakeSaveBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const homePage = document.getElementById("homePage");
+            const calendarPage = document.getElementById("calendarPage");
+
+            document.getElementById("showHomePage").addEventListener("click", () => {
+                homePage.style.display = "block";
+                calendarPage.style.display = "none";
+            });
+
+            document.getElementById("showCalendarPage").addEventListener("click", () => {
+                homePage.style.display = "none";
+                calendarPage.style.display = "block";
+            });
+
+            // Timer Logic
+            let countdownInterval;
+            let remainingTime = 20 * 60;
+            let isPaused = false;
+
+            const updateTimerText = () => {
+                const minutes = Math.floor(remainingTime / 60).toString().padStart(2, "0");
+                const seconds = (remainingTime % 60).toString().padStart(2, "0");
+                document.getElementById("timerText").textContent = `${minutes}:${seconds}`;
+            };
+
+            const startCountdown = () => {
+                if (countdownInterval || remainingTime <= 0) return;
+                countdownInterval = setInterval(() => {
+                    if (!isPaused && remainingTime > 0) {
+                        remainingTime--;
+                        updateTimerText();
+                    } else if (remainingTime <= 0) {
+                        clearInterval(countdownInterval);
+                        alert("Time's up!");
+                    }
+                }, 1000);
+            };
+
+            const togglePause = () => {
+                isPaused = !isPaused;
+            };
+
+            document.getElementById("playButton").addEventListener("click", startCountdown);
+            document.getElementById("pauseButton").addEventListener("click", togglePause);
+            updateTimerText();
+
+            // Task Logic
+            const taskList = document.getElementById("sortable");
+            const addTaskButton = document.getElementById("addTaskButton");
+            const editTaskModal = document.getElementById("editTaskModal");
+            const editTaskInput = document.getElementById("editTaskInput");
+            const editTakeSaveBtn = document.getElementById("editTakeSaveBtn");
+            let currentTaskElement = null; // To store the task being edited
+
+            // Function to create a new task element
+            function createTaskElement(taskText) {
+                const newTask = document.createElement("li");
+                newTask.className = "list-item";
+                newTask.innerHTML = `
+                    ${taskText}
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal" data-shartText="${taskText}">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger deleteTaskButton">Delete</button>
+                `;
+                return newTask;
+            }
+
+            // Event listener for adding a new task
+            addTaskButton.addEventListener("click", () => {
+                const taskText = prompt("Enter the new task:");
+                if (taskText) {
+                    const newTask = createTaskElement(taskText);
+                    taskList.appendChild(newTask);
+                }
+            });
+
+            // Event delegation for handling delete and edit buttons
+            taskList.addEventListener("click", (event) => {
+                if (event.target.classList.contains("deleteTaskButton")) {
+                    // Delete task logic
+                    const taskItem = event.target.closest("li");
+                    if (taskItem) {
+                        taskItem.remove();
+                    }
+                }
+
+                if (event.target.hasAttribute("data-bs-toggle")) {
+                    // Edit task logic
+                    const button = event.target;
+                    currentTaskElement = button.closest("li");
+                    const shartText = button.getAttribute("data-shartText");
+                    editTaskInput.value = shartText;
+                }
+            });
+
+            // Save edited task text
+            editTakeSaveBtn.addEventListener("click", () => {
+                if (currentTaskElement) {
+                    const newTaskText = editTaskInput.value;
+
+                    // Update the task's display text
+                    currentTaskElement.childNodes[0].textContent = newTaskText + " ";
+
+                    // Update the edit button's data attribute
+                    const editButton = currentTaskElement.querySelector('[data-bs-toggle="modal"]');
+                    editButton.setAttribute("data-shartText", newTaskText);
+
+                    // Close the modal
+                    const modalInstance = bootstrap.Modal.getInstance(editTaskModal);
+                    modalInstance.hide();
+                }
+            });        
+        });
+    </script>
+</body>
+
+</html>

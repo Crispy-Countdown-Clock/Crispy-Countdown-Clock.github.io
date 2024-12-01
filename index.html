@@ -18,6 +18,7 @@
     </style> -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    
     <script>
     $( function() {
         $( "#sortable" ).sortable();
@@ -44,16 +45,16 @@
             </div>
 
             <div class="col-md-4">
-                <img class="center-block" alt="countdown clock probably" src="/img/sports-q-c-140-140-3.jpg" />
-                <h3 class="text-center">
+                <img class="center-block" alt="countdown clock probably" src="i dont know yet" />
+                <h3 class="text-center" id="timerText">
                     20:00
                 </h3>
                 <div class="row">
                     <div class="col-md-6">
-                        <img alt="play icon" src="/img/sports-q-c-140-140-3.jpg" />
+                        <img alt="play icon" id="playButton" src="i dont know yet" />
                     </div>
                     <div class="col-md-6">
-                        <img alt="pause icon" src="/img/sports-q-c-140-140-3.jpg" />
+                        <img alt="pause icon" id="pauseButton" src="i dont know yet" />
                     </div>
                 </div>
                 <!-- <div class="container-fluid"> -->
@@ -66,60 +67,27 @@
                                 <li class="list-item">
                                     do homework
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal"
+                                    data-shartText="hello Sigma">
                                         Edit Icon
                                     </button>
-                                    
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                            </div>
-                                            <div class="modal-body">
-                                                stuff
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-  
+                                    <button type="button" class="btn btn-danger deleteTaskButton">Delete</button>
                                 </li>
 
                                 <li class="list-item">
                                     do dishes
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal"
+                                    data-shartText="sigmatic compression engine">
                                         Edit Icon
                                     </button>
-                                    
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-                                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                            </div>
-                                            <div class="modal-body">
-                                                stuff
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
-                                            <button type="button" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-  
+                                    <button type="button" class="btn btn-danger deleteTaskButton">Delete</button>
                                 </li>
 
                             </ol>
+
+                            <button type="button" class="btn btn-success" id="addTaskButton">Add Task</button>
+
                         </div>
                     </div>
                 <!-- </div> -->
@@ -138,6 +106,183 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Task Modal -->
+    <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+
+                <div class="modal-body">
+                    <input type="text" id="editTaskInput">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard Changes</button>
+                    <button type="button" class="btn btn-primary" id="editTakeSaveBtn">Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const editTaskModal = document.getElementById("editTaskModal");
+            const editTaskInput = document.getElementById("editTaskInput");
+            const editTakeSaveBtn = document.getElementById("editTakeSaveBtn");
+            let currentTaskElement = null; // To store the task being edited
+    
+            // Triggered when the modal is about to be shown
+            editTaskModal.addEventListener('show.bs.modal', (event) => {
+                // Get the button that triggered the modal
+                const button = event.relatedTarget;
+    
+                // Retrieve the parent task element
+                currentTaskElement = button.closest('li');
+    
+                // Retrieve the data-shartText attribute
+                const shartText = button.getAttribute("data-shartText");
+    
+                // Populate the input field with the task's text
+                editTaskInput.value = shartText;
+            });
+    
+            // Update the task when "Save" is clicked
+            editTakeSaveBtn.addEventListener('click', () => {
+                if (currentTaskElement) {
+                    // Update the task's text with the input value
+                    const newTaskText = editTaskInput.value;
+    
+                    // Find the text node and update it
+                    currentTaskElement.childNodes[0].textContent = newTaskText + ' ';
+    
+                    // Update the data-shartText attribute of the edit button
+                    const editButton = currentTaskElement.querySelector('[data-bs-toggle="modal"]');
+                    editButton.setAttribute('data-shartText', newTaskText);
+    
+                    // Close the modal
+                    const modalInstance = bootstrap.Modal.getInstance(editTaskModal);
+                    modalInstance.hide();
+                }
+            });
+        });
+    </script>
+    
+
+    <script>
+        // Triggered when the modal is about to be shown
+        document.addEventListener("DOMContentLoaded", () => {
+            const editTaskModal = document.getElementById("editTaskModal");
+            const editTaskInput = document.getElementById("editTaskInput");
+    
+            editTaskModal.addEventListener('show.bs.modal', (event) => {
+                // Get the button that triggered the modal
+                const button = event.relatedTarget;
+    
+                // Retrieve the data-shartText attribute
+                const shartText = button.getAttribute("data-shartText");
+    
+                // Populate the input field with the task's text
+                editTaskInput.value = shartText;
+            });
+        });
+    </script>
+
+    <script>
+        let countdownInterval; // Store the timer interval
+        let remainingTime = 20 * 60; // 20 minutes in seconds
+        let isPaused = false; // Track pause/resume state
+
+        // Function to update the timer text
+        function updateTimerText() {
+            const minutes = Math.floor(remainingTime / 60).toString().padStart(2, '0');
+            const seconds = (remainingTime % 60).toString().padStart(2, '0');
+            document.getElementById("timerText").textContent = `${minutes}:${seconds}`;
+        }
+
+        // Function to start the countdown
+        function startCountdown() {
+            if (countdownInterval || remainingTime <= 0) return; // Avoid multiple intervals
+            countdownInterval = setInterval(() => {
+                if (!isPaused) {
+                    if (remainingTime > 0) {
+                        remainingTime--;
+                        updateTimerText();
+                    } else {
+                        clearInterval(countdownInterval);
+                        countdownInterval = null; // Timer ends
+                        alert("Time's up!");
+                    }
+                }
+            }, 1000);
+        }
+
+        // Function to toggle pause/resume
+        function togglePause() {
+            isPaused = !isPaused; // Toggle state
+        }
+
+        // Add event listeners to play and pause buttons
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("playButton").addEventListener("click", startCountdown);
+            document.getElementById("pauseButton").addEventListener("click", togglePause);
+            updateTimerText(); // Initialize timer display
+        });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const taskList = document.getElementById("sortable"); // The list element
+        const addTaskButton = document.getElementById("addTaskButton"); // The "Add Task" button
+
+        // Function to create a new task element
+        function createTaskElement(taskText) {
+            const newTask = document.createElement("li");
+            newTask.className = "list-item";
+            newTask.innerHTML = `
+                ${taskText}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTaskModal"
+                    data-shartText="${taskText}">
+                    Edit Icon
+                </button>
+                <button type="button" class="btn btn-danger deleteTaskButton">Delete</button>
+            `;
+
+            // Add delete functionality to the delete button of the task
+            newTask.querySelector('.deleteTaskButton').addEventListener('click', () => {
+                newTask.remove();
+            });
+
+            return newTask;
+        }
+
+        // Add event listener to "Add Task" button
+        addTaskButton.addEventListener("click", () => {
+            // Prompt the user for the task text
+            const taskText = prompt("Enter the new task:");
+
+            if (taskText) {
+                // Create and append the new task
+                const newTask = createTaskElement(taskText);
+                taskList.appendChild(newTask);
+            }
+        });
+
+        // Add delete functionality to existing tasks on page load
+        taskList.querySelectorAll('.deleteTaskButton').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.target.closest('li').remove();
+            });
+        });
+    });
+</script>
+
+
 </body>
 
 
